@@ -20,13 +20,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/ingredients')->group(function () {
     Route::get('/', [IngredientController::class, 'index'])->name('api.ingredients.list');
-    Route::post('/', [IngredientController::class, 'store'])->name('api.ingredients.add');
-    Route::get('/categories', [CategoryController::class, 'index'])->name('api.ingredients.categories');
+    Route::post('/', [IngredientController::class, 'store'])
+        ->name('api.ingredients.add')
+        ->middleware('auth:sanctum');
+    Route::get('/categories', [CategoryController::class, 'index'])
+        ->name('api.ingredients.categories');
 });
 
 Route::prefix('/pizza')->group(function () {
     Route::get('/', [PizzaController::class, 'index'])->name('api.pizza.list');
-    Route::get('/{id}', [PizzaController::class, 'show'])->name('api.pizza.show');
+    Route::get('/{slug}', [PizzaController::class, 'show'])->name('api.pizza.show');
     Route::post('/', [PizzaController::class, 'store'])->name('api.pizza.add');
 });
 

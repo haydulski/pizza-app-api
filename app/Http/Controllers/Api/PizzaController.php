@@ -26,12 +26,11 @@ class PizzaController extends Controller
         return PizzasResource::collection($data);
     }
 
-    public function show(string $id): PizzasResource
+    public function show(string $slug): PizzasResource
     {
-        $decodeId = Hashids::decode($id);
-        $stringId = strval($decodeId[0]);
-        $data = Cache::remember('pizza_'.$stringId, 60 * 60 * 8, function () use ($stringId) {
-            return Pizza::find($stringId);
+
+        $data = Cache::remember('pizza_' . $slug, 60 * 60 * 8, function () use ($slug) {
+            return Pizza::where('slug', $slug)->first();
         });
 
         return new PizzasResource($data);
@@ -42,9 +41,9 @@ class PizzaController extends Controller
         $data = $req->validated();
         $data['img'] = $this->storeImg($data['img'], $data['name']);
         $data['thumbnail'] = $this->makeThumbnail($data['img']);
-        $data['img'] = $this->imgFolder.$data['img'];
+        $data['img'] = $this->imgFolder . $data['img'];
 
-        if (! isset($data['slug'])) {
+        if (!isset($data['slug'])) {
             $data['slug'] = Str::slug($data['name'], '-');
         }
 
@@ -57,8 +56,8 @@ class PizzaController extends Controller
     {
         $fileName = Str::slug(Str::lower($name), '-');
         $extension = $file->getClientOriginalExtension();
-        $nameToStore = $fileName.'.'.$extension;
-        $thumName = 'thumbnail-'.$nameToStore;
+        $nameToStore = $fileName . '.' . $extension;
+        $thumName = 'thumbnail-' . $nameToStore;
 
         Storage::putFileAs($this->imgFolder, $file, $nameToStore, 'public');
         Storage::putFileAs($this->imgFolder, $file, $thumName, 'public');
@@ -68,13 +67,13 @@ class PizzaController extends Controller
 
     private function makeThumbnail(string $name): string
     {
-        $path = Storage::path($this->imgFolder.'thumbnail-'.$name);
+        $path = Storage::path($this->imgFolder . 'thumbnail-' . $name);
         $img = Image::make($path)->resize(500, 500, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });
         $img->save($path);
 
-        return $this->imgFolder.'thumbnail-'.$name;
+        return $this->imgFolder . 'thumbnail-' . $name;
     }
 }
