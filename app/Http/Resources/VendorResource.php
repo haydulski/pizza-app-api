@@ -11,7 +11,7 @@ class VendorResource extends JsonResource
     {
         return [
             'id' => Hashids::encode($this->id),
-            'name' => $this->id,
+            'name' => $this->name,
             'surname' => $this->surname,
             'email' => $this->email,
             'street' => $this->street,

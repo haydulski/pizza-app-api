@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\Api\UsersController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [UsersController::class, 'store'])

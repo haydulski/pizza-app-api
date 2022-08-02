@@ -33,16 +33,15 @@ Route::prefix('/pizza')->group(function () {
     Route::post('/', [PizzaController::class, 'store'])->name('api.pizza.add');
 });
 
-Route::prefix('/order')->group(function () {
-    Route::get('/', [OrderController::class, 'index'])->name('api.order.list');
-    Route::post('/', [OrderController::class, 'store'])->name('api.order.add');
-});
-
 Route::middleware(['auth:sanctum'])->group(function () {
+    Route::prefix('/order')->group(function () {
+        Route::get('/', [OrderController::class, 'index'])->name('api.order.list');
+        Route::post('/', [OrderController::class, 'store'])->name('api.order.add');
+    });
     Route::prefix('/user')->group(function () {
         Route::get('/', [ApiUsersController::class, 'vendor'])->name('api.user.vendor');
-        Route::get('/all', [ApiUsersController::class, 'index'])->name('api.user.all');
         Route::post('/', [ApiUsersController::class, 'store'])->name('api.user.create');
+        Route::get('/all', [ApiUsersController::class, 'index'])->name('api.user.all');
         Route::post('/update', [ApiUsersController::class, 'update'])->name('api.user.update');
         Route::get('/order/{hashId}', [OrderController::class, 'show'])->name('api.user.single-order');
     });

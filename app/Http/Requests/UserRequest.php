@@ -20,7 +20,7 @@ class UserRequest extends FormRequest
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'string', 'confirmed', Password::defaults()],
             'name' => ['required', 'string', 'max:255'],
-            'surname' => ['nullable', 'string', 'max:255'],
+            'surname' => ['string', 'max:255'],
             'street' => ['nullable', 'string', 'max:255'],
             'house_number' => ['nullable', 'string', 'max:100'],
             'city' => ['nullable', 'string', 'max:255'],

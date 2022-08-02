@@ -17,7 +17,7 @@ class UsersController extends Controller
 {
     public function index(): Response
     {
-        if (! Gate::allows('admin-check', Auth::user())) {
+        if (!Gate::allows('admin-check', Auth::user())) {
             return response()->json(['errors' => 'You are not admin'], 403);
         }
         $data = User::where('is_admin', 0)->get();
@@ -42,10 +42,10 @@ class UsersController extends Controller
     public function update(UserUpdateReaquest $req): Response
     {
         $data = $req->validated();
-        $user = user::find(Auth::id());
+        $user = User::find(Auth::id());
         $user->update($data);
 
-        return response()->json($user);
+        return response()->json($data);
     }
 
     public function vendor(): VendorResource
