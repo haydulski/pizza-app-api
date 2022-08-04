@@ -30,7 +30,7 @@ Route::prefix('/ingredients')->group(function () {
 Route::prefix('/pizza')->group(function () {
     Route::get('/', [PizzaController::class, 'index'])->name('api.pizza.list');
     Route::get('/{slug}', [PizzaController::class, 'show'])->name('api.pizza.show');
-    Route::post('/', [PizzaController::class, 'store'])->name('api.pizza.add');
+    Route::post('/', [PizzaController::class, 'store'])->name('api.pizza.add')->middleware('auth:sanctum');
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {

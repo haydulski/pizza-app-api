@@ -7,9 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Laravel</h1>
-    @if($errors)
-    @dump($errors)
-    @endif
+    <h1>Laravel Pizza api</h1>
+    @dump(getcwd())
+    
 </body>
 </html>
