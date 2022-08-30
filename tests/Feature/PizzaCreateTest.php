@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Storage;
 
 uses(Illuminate\Foundation\Testing\WithFaker::class);
 
-
 test('create new pizza', function () {
     Storage::fake('avatars');
     $file = UploadedFile::fake()->image('avatars.jpg');
