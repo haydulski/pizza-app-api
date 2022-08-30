@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -53,10 +55,5 @@ class OrderController extends Controller
         }
 
         return OrderShowResource::collection($data);
-    }
-
-    public function test()
-    {
-        dd(Auth::id());
     }
 }

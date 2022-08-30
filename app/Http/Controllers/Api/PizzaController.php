@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -13,7 +15,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpFoundation\Response;
-use Vinkla\Hashids\Facades\Hashids;
 
 class PizzaController extends Controller
 {

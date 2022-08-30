@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
@@ -13,7 +15,7 @@ class UsersController extends Controller
     {
         $data = $req->validated();
 
-        if (! isset($data)) {
+        if (!isset($data)) {
             return response(401)->json(['errors' => 'validation error']);
         }
         $data['password'] = Hash::make($data['password']);
