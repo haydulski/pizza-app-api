@@ -27,6 +27,11 @@ class UsersController extends Controller
 
     public function store(UserRequest $req): Response
     {
+        $count = User::count();
+        if ($count > 10) {
+            return response()->json('Too many users', 206);
+        }
+
         $data = $req->validated();
 
         $data['password'] = Hash::make($data['password']);
