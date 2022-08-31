@@ -40,9 +40,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
     Route::prefix('/user')->group(function () {
         Route::get('/', [ApiUsersController::class, 'vendor'])->name('api.user.vendor');
-        Route::post('/', [ApiUsersController::class, 'store'])->name('api.user.create');
         Route::get('/all', [ApiUsersController::class, 'index'])->name('api.user.all');
         Route::post('/update', [ApiUsersController::class, 'update'])->name('api.user.update');
         Route::get('/order/{hashId}', [OrderController::class, 'show'])->name('api.user.single-order');
     });
 });
+
+Route::post('/user', [ApiUsersController::class, 'store'])->name('api.user.create');
